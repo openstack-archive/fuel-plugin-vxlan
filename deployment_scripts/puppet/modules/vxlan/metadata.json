@@ -1,0 +1,14 @@
+{
+  "name": "vxlan",
+  "version": "0.1.0",
+  "author": "samuelbartel",
+  "summary": "Module to manage vxlan",
+  "license": "Apache 2.0",
+  "source": "",
+  "project_page": "samuel.bartel@orange.com",
+  "issues_url": "samuel.bartel@orange.com",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+

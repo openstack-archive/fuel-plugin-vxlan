@@ -1,0 +1,6 @@
+attributes:
+  # Show vxlan only for neutron
+  metadata:
+    restrictions:
+      - condition: "cluster:net_provider != 'neutron'"
+        action: hide
