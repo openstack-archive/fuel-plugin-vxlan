@@ -45,11 +45,11 @@ include vxlan::params
 
   neutron_plugin_ml2 {
       'ml2/type_drivers': value => 'vxlan,flat,vlan,gre';
-  }~> Service['neutron-plugin-openvswitch-agent']
+  }~> Service["$vxlan::params::openvswitch_agent_compute"]
 
   neutron_plugin_ml2 {
       'ml2/tenant_network_types': value => 'vxlan,flat,vlan,gre';
-  }~> Service['neutron-plugin-openvswitch-agent']
+  }~> Service["$vxlan::params::openvswitch_agent_compute"]
 
 
   neutron_plugin_ml2 {
@@ -58,7 +58,7 @@ include vxlan::params
 
   neutron_plugin_ml2 { 
       'agent/tunnel_types': value => 'vxlan,gre';
-  }~> Service['neutron-plugin-openvswitch-agent']
+  }~> Service["$vxlan::params::openvswitch_agent_compute"]
 
   class {'::firewall':}
 
@@ -80,7 +80,7 @@ include vxlan::params
 
 
 
-  service { 'neutron-plugin-openvswitch-agent':
+  service { "$vxlan::params::openvswitch_agent_compute":
     ensure  => running,
     enable  => true,
   }
