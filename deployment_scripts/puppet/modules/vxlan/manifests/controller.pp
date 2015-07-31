@@ -41,6 +41,14 @@ class vxlan::controller (
 include vxlan::params
 
 
+  neutron_router_interface { "router04:net04__subnet":
+    ensure => absent,
+  }
+
+  neutron_network { 'net04':
+    ensure                    => absent,
+  }
+
   #update  ml2 configuration
   neutron_plugin_ml2 {
       'ml2/type_drivers': value => 'vxlan,flat,vlan,gre';

@@ -36,33 +36,17 @@
 # Copyright 2014 Your name here, unless otherwise noted.
 #
 class vxlan::neutron_services (){
-  if ($::fuel_settings['deployment_mode'] == 'multinode') {
-
-    neutron_plugin_ml2 { 
-        'agent/tunnel_types': value => 'vxlan,gre';
-    }~> Service['neutron-plugin-openvswitch-agent']
-    service { 'neutron-plugin-openvswitch-agent':
-      ensure  => running,
-      enable  => true,
-    }
-    service { 'neutron-l3-agent':
-      ensure  => running,
-      enable  => true,
-    }
-  }
-  else {
+include vxlan::params
 
     neutron_plugin_ml2 {
         'agent/tunnel_types': value => 'vxlan';
-    }->
-    exec { "neutron-pluign-openvswitch-agent_restart":
-      command => "/usr/sbin/crm resource restart p_neutron-plugin-openvswitch-agent",
+    } ~> Service['neutron-server']
+    ->
+    exec { "neutron-plugin-openvswitch-agent_restart":
+      command => "/usr/sbin/crm resource restart $vxlan::params::openvswitch_agent",
     }->
     exec { "neutron-l3-agent_restart":
       command => "/usr/sbin/crm resource restart p_neutron-l3-agent",
     }
 
-
-
-  }
 }
