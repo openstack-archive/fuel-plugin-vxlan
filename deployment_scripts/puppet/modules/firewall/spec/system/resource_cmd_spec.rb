@@ -1,6 +1,6 @@
 require 'spec_helper_system'
 
-# Here we want to test the the resource commands ability to work with different
+# Here we want to test the resource commands ability to work with different
 # existing ruleset scenarios. This will give the parsing capabilities of the
 # code a good work out.
 describe 'puppet resource firewall command:' do
